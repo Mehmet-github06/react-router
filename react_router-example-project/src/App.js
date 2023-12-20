@@ -9,27 +9,32 @@ import PersonDetail from "./pages/PersonDetail";
 import Aws from "./pages/Aws";
 import FullStack from "./pages/Fullstack";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Fronted from "./pages/Fronted";
+import Frontend from "./pages/Frontend";
 import Backend from "./pages/Backend";
+import Login from "./pages/Login";
+import PrivateRouter from "./pages/PrivateRouter";
 
 function App() {
   return (
     <BrowserRouter>
       <Nav />
-
+ 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/people" element={<People />} />
-        <Route path="/people/:idx" element={<PersonDetail />} />
+        <Route path="/people" element={<PrivateRouter />}>
+          <Route index path="" element={<People />} />
+          <Route path="/people/:idx" element={<PersonDetail />} />
+        </Route>
+        <Route path="login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
-        //+ aynı sayfa içinde sayfa açmak için nrsted yapı
+        //+ aynı sayfa içinde sayfa açmak için nested yapı
         <Route path="/paths" element={<Paths />}>
           <Route path="fs" element={<FullStack />}>
-            <Route path="aws" element={<Fronted/>} />
-            <Route path="aws" element={<Backend/>} />
+            <Route path="frontend" element={<Frontend />} />
+            <Route path="backend" element={<Backend />} />
           </Route>
 
-          <Route path="aws" element={<Aws />} />
+          <Route index path="" element={<Aws />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -1,4 +1,8 @@
+import { Outlet , Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const FullStack = () => {
+  const navigate = useNavigate();
   return (
     <div className="mt-4 text-center">
       <h1 className="display-6 text-success">Full Stack Path</h1>
@@ -13,8 +17,15 @@ const FullStack = () => {
       <div>
         <button className="btn btn-outline-success mt-4">Learn More</button>
       </div>
+      <Link  to="frontend" className="btn btn-danger" >
+        Fronted
+      </Link>
+      <button className="btn btn-warning" onClick={() => navigate("backend")}>
+        Backend
+      </button>
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default FullStack
+export default FullStack;
