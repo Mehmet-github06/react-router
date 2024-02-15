@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import logo from "../img/logo.png";
+import { useLoginContextCall } from "../context/LoginProvider";
+// import { LoginContext } from "../context/LoginContext";
 
 function Nav() {
+  const {user,setUser}=useLoginContextCall()
   return (
     <nav className="navbar navbar-expand-md navbar-light">
       <div className="container-fluid">
@@ -39,6 +42,18 @@ function Nav() {
               <NavLink to="/contact" className="nav-link" aria-current="page">
                 Contact
               </NavLink>
+            </li>
+            <li className="nav-item">
+              {user.email && user.password ? (
+                <NavLink to="/login" className="nav-link" aria-current="page" onClick={()=>setUser({email:"",password:""})}>
+                logout
+              </NavLink>
+              ) : (
+                <NavLink to="/login" className="nav-link" aria-current="page">
+                login
+              </NavLink>
+              )}
+              
             </li>
           </ul>
         </div>
